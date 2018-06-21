@@ -1,3 +1,5 @@
+//Calculates the least amount of coins necessary to make change
+
 #include <cs50.h>
 #include <stdio.h>
 #include <math.h>
@@ -6,8 +8,10 @@ int getChange(float amount);
 
 int main(void)
 {
+    //holds user response
     float amount;
 
+    //continuously asks user while amount is less than 0
     do
     {
         amount = get_float("Change: ");
@@ -18,6 +22,8 @@ int main(void)
     printf("%i \n", coinsNeeded);
 }
 
+//Calculates the least number of coins needed with argument amount
+//Returns int number of coins
 int getChange(float amount)
 {
     const float QTR = 25;
@@ -25,38 +31,34 @@ int getChange(float amount)
     const float NKL = 5;
     const float PNY = 1;
 
-    int coins = 0;
+    int coins = 0
+    //Converts the float to an int, after rounding
     float change = roundf(amount * 100);
     int changeLeft = change;
 
-    printf("Initial change amount: %i\n", changeLeft);
+    //Checks if the change remaining is greater than each coin piece
+    //If it is, subtracts that coin's total from the remaining amount
+    //and adds a coin
+    //Continues until change left is 0
     do
     {
         while (changeLeft >= QTR)
         {
-            printf("Entering QTR...\n");
-            printf("Amount left: %i\n", changeLeft);
             changeLeft -= QTR;
             coins++;
         }
         while (changeLeft >= DIME)
         {
-            printf("Entering DIME...\n");
-            printf("Amount left: %i\n", changeLeft);
             changeLeft -= DIME;
             coins++;
         }
         while (changeLeft >= NKL)
         {
-            printf("Entering NKL...\n");
-            printf("Amount left: %i\n", changeLeft);
             changeLeft -= NKL;
             coins++;
         }
         while (changeLeft >= PNY)
         {
-            printf("Entering PNY...\n");
-            printf("Amount left: %i\n", changeLeft);
             changeLeft -= PNY;
             coins++;
         }
